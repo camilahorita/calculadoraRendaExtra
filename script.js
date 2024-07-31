@@ -23,14 +23,21 @@ function calcular() {
   }
 
   const resultadoDiv = document.getElementById('resultadoDiv');
-  resultadoDiv.innerHTML = `
-      <div>
-          <p>Investimento Inicial: R$ ${investimento.toFixed(2)}</p>
-          <p>Receita ${receitaTipo === 'hora' ? 'por Hora' : 'por Dia'}: R$ ${receita.toFixed(2)}</p>
-          <p>Meta de Lucro: R$ ${meta.toFixed(2)}</p>
-          <h3>Você precisará trabalhar por aproximadamente <span id="days-needed">${diasNecessarios} dias</span> para alcançar sua meta.</h3>
-      </div>
-  `;
+  if (diasNecessarios > 0) {
+        resultadoDiv.innerHTML = `
+            <div>
+                <p>Investimento Inicial: R$ ${investimento.toFixed(2)}</p>
+                <p>Receita ${receitaTipo === 'hora' ? 'por Hora' : 'por Dia'}: R$ ${receita.toFixed(2)}</p>
+                <p>Meta de Lucro: R$ ${meta.toFixed(2)}</p>
+                <h3>Você precisará trabalhar por aproximadamente <span id="days-needed">${diasNecessarios} dias</span> para alcançar sua meta.</h3>
+            </div>
+        `;
+        resultadoDiv.style.display = 'block';
+    } else {
+        resultadoDiv.style.display = 'none';
+    }
+
+  resultadoDiv.style.display = diasNecessarios > 0 ? 'block' : 'none';
 
   resultadoDiv.style.display = diasNecessarios > 0 ? 'block' : 'none';
 }
