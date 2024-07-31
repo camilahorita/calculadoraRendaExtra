@@ -1,1 +1,1 @@
-Calculadora renda extra
+Calculadora de renda extra
