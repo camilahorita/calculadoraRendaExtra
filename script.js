@@ -38,8 +38,6 @@ function calcular() {
     }
 
   resultadoDiv.style.display = diasNecessarios > 0 ? 'block' : 'none';
-
-  resultadoDiv.style.display = diasNecessarios > 0 ? 'block' : 'none';
 }
 
 document.querySelectorAll('input[name="receitaTipo"]').forEach((input) => {
