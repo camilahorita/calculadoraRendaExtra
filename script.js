@@ -1,54 +1,67 @@
-function calcular() {
-  // Pegar o valor da viagem selecionada
-  const viagemSelecionada = document.querySelector('input[name="hours-type"]:checked').value;
-  const viagemCusto = parseFloat(viagemSelecionada);
-  const investimento = parseFloat(document.getElementById('investimento').value);
-  const receita = parseFloat(document.getElementById('receita').value);
-  const receitaTipo = document.querySelector('input[name="receitaTipo"]:checked').value;
+document.addEventListener('DOMContentLoaded', function () {
+    const outroRadio = document.getElementById('outro');
+    const outroDiv = document.getElementById('outroDiv');
+    const lucroRadios = document.getElementsByName('lucro');
+    const outrosValorInput = document.getElementById('outrosValor');
 
-  let diasNecessarios = 0;
-
-  if (receitaTipo === 'hora') {
-      const horas = parseFloat(document.getElementById('horas').value);
-      if (isNaN(investimento) || isNaN(receita) || isNaN(viagemCusto) || isNaN(horas) || receita <= 0 || viagemCusto <= 0 || horas <= 0) {
-          alert('Por favor, insira valores válidos.');
-          return;
-      }
-      const receitaDiaria = receita * horas;
-      diasNecessarios = Math.ceil((investimento + viagemCusto) / receitaDiaria);
-  } else {
-      if (isNaN(investimento) || isNaN(receita) || isNaN(viagemCusto) || receita <= 0 || viagemCusto <= 0) {
-          alert('Por favor, insira valores válidos.');
-          return;
-      }
-      diasNecessarios = Math.ceil((investimento + viagemCusto) / receita);
-  }
-
-  const resultadoDiv = document.getElementById('resultadoDiv');
-    if (diasNecessarios > 0) {
-        resultadoDiv.innerHTML = `
-            <div>
-                <p>Investimento Inicial: R$ ${investimento.toFixed(2)}</p>
-                <p>Receita ${receitaTipo === 'hora' ? 'por Hora' : 'por Dia'}: R$ ${receita.toFixed(2)}</p>
-                <p>Meta: R$ ${viagemCusto.toFixed(2)}</p>
-                <h3>Você precisará trabalhar por aproximadamente <span id="days-needed">${diasNecessarios} dias</span> para alcançar sua meta.</h3>
-            </div>
-        `;
-        resultadoDiv.style.display = 'block';
-    } else {
-        resultadoDiv.style.display = 'none';
+    // Função para atualizar a visibilidade do campo de entrada para "Outro"
+    function atualizarVisibilidadeOutro() {
+        if (outroRadio.checked) {
+            outroDiv.style.display = 'block';
+        } else {
+            outroDiv.style.display = 'none';
+            // Se a opção "Outro" não estiver selecionada, limpa o campo de entrada
+            outrosValorInput.value = '';
+        }
     }
 
-  resultadoDiv.style.display = diasNecessarios > 0 ? 'block' : 'none';
+    // Adiciona o evento change aos botões de rádio de lucro
+    lucroRadios.forEach(radio => {
+        radio.addEventListener('change', function () {
+            // Atualiza a visibilidade do campo "Outro"
+            atualizarVisibilidadeOutro();
+        });
+    });
+
+    // Chama a função inicial para garantir que a visibilidade está correta ao carregar a página
+    atualizarVisibilidadeOutro();
+});
+
+function calcular() {
+    // Obtém o valor do lucro selecionado
+    const lucroRadios = document.getElementsByName('lucro');
+    let lucroMensal = 0;
+    const valorInserido = parseFloat(document.getElementById('outrosValor').value);
+
+    for (const radio of lucroRadios) {
+        if (radio.checked) {
+            if (radio.id === 'outro') {
+                // Se a opção "Outro" estiver selecionada, usa o valor inserido manualmente
+                lucroMensal = valorInserido || 0; // Usa 0 se o valor inserido não for válido
+            } else {
+                lucroMensal = parseFloat(radio.value);
+            }
+            break;
+        }
+    }
+
+    // Obtém o valor da meta selecionada
+    const metaRadios = document.getElementsByName('meta');
+    let meta = 0;
+    for (const radio of metaRadios) {
+        if (radio.checked) {
+            meta = parseFloat(radio.value);
+            break;
+        }
+    }
+
+    // Calcula o número de meses necessários
+    const mesesNecessarios = lucroMensal > 0 ? Math.ceil(meta / lucroMensal) : 0;
+
+    // Exibe o resultado
+    const resultadoDiv = document.getElementById('resultadoDiv');
+    resultadoDiv.style.display = 'block';
+    resultadoDiv.innerHTML = `<h3>Resultado:</h3>
+        <p>Com um lucro mensal de R$ ${lucroMensal.toFixed(2)}, você vai precisar de <b>${mesesNecessarios} meses </b> para alcançar a meta de:</p> <p>R$ ${meta.toFixed(2)} </p>`;
 }
 
-document.querySelectorAll('input[name="receitaTipo"]').forEach((input) => {
-  input.addEventListener('change', (event) => {
-      const horasPorDiaContainer = document.getElementById('horasPorDiaContainer');
-      if (event.target.value === 'hora') {
-          horasPorDiaContainer.style.display = 'block';
-      } else {
-          horasPorDiaContainer.style.display = 'none';
-      }
-  });
-});
