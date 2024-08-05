@@ -59,9 +59,10 @@ function calcular() {
     const mesesNecessarios = lucroMensal > 0 ? Math.ceil(meta / lucroMensal) : 0;
 
     // Exibe o resultado
-    const resultadoDiv = document.getElementById('resultadoDiv');
-    resultadoDiv.style.display = 'block';
-    resultadoDiv.innerHTML = `<h3>Resultado:</h3>
-        <p>Com um lucro mensal de R$ ${lucroMensal.toFixed(2)}, você vai precisar de <b>${mesesNecessarios} meses </b> para alcançar a meta de:</p> <p>R$ ${meta.toFixed(2)} </p>`;
+    document.getElementById('lucro-mensal').innerText = `${lucroMensal.toFixed(2)}`;
+    document.getElementById('lucro-anual').innerText = `${(lucroMensal*12).toFixed(2)}`;
+    document.getElementById('meses').innerHTML = `${mesesNecessarios}`;
+    // Exibir resultados
+    document.getElementById('result').style.display = 'block';
+    
 }
-
