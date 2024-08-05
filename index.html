@@ -9,49 +9,55 @@
 <body>
     <div class="container">
         <h2>Calculadora 5</h2>
-        <label for="investimento"><h3>Custo/Investimento Inicial (R$):</h3></label>
-        <input type="number" id="investimento" placeholder="Digite o custo/investimento inicial">
-
-        <label for="receita"><h3>Receita (R$):</h3></label>
-        <input type="number" id="receita" placeholder="Digite o valor ganho em reais">
-
+        <label for="receita"><h3>Lucro (R$/mês):</h3></label>
         <div class="radio-group">
             <div>
-                <input type="radio" id="porHora" name="receitaTipo" value="hora" checked>
-                <label for="porHora">Por Hora</label>
-                <input id="porDia" type="radio" id="porDia" name="receitaTipo" value="dia">
-                <label for="porDia">Por Dia</label>
+                <input type="radio" id="brigadeiro" name="lucro" value="400">
+                <label for="brigadeiro"><b>Venda Brigadeiro </b>- R$ 400,00 </label>
+            </div>
+            <div>
+                <input type="radio" id="ifood" name="lucro" value="864">
+                <label for="ifood"><b>Entregas Ifood</b>- R$ 864,00</label>
+            </div>
+            <div>
+                <input type="radio" id="planilhas" name="lucro" value="1700">
+                <label for="planilhas"><b>Vendas de Planilhas</b>- R$ 1.700,00</label>
+            </div>
+            <div>
+                <input type="radio" id="aulas" name="lucro" value="1900">
+                <label for="aulas"><b>Aulas Particulares </b>- R$ 1.900,00</label>
+            </div>
+            <div>
+                <input type="radio" id="outro" name="lucro" value="0">
+                <label for="outro"><b>Outro valor (R$/mês)</b></label>
+            </div>
+            <div id="outroDiv" style="display: none;">
+                <input type="number" id="outrosValor" placeholder="Digite o valor"><br>
             </div>
         </div>
-
-        <div id="horasPorDiaContainer">
-            <label for="horas"><h3>Horas trabalhadas por dia:</h3></label>
-            <input type="number" id="horas" placeholder="Digite a quantidade de horas por dia">
-        </div>
-
+        
         <label for="goal"><h3>Escolha a Meta de Viagem:</h3></label>
         <div class="radio-group">
             <div>
-                <input type="radio" id="nyc" name="hours-type" value="36164" checked>
+                <input type="radio" id="nyc" name="meta" value="36164" checked>
                 <label for="nyc"><b>Intercâmbio NYC </b>- R$ 36.164,00 </label>
             </div>
             <div>
-                <input type="radio" id="paris" name="hours-type" value="26770">
+                <input type="radio" id="paris" name="meta" value="26770">
                 <label for="paris"><b>Férias em Paris</b>- R$ 26.770,00</label>
             </div>
             <div>
-                <input type="radio" id="disney" name="hours-type" value="39586">
+                <input type="radio" id="disney" name="meta" value="39586">
                 <label for="disney"><b>Disney</b>- R$ 39.586,00</label>
             </div>
             <div>
-                <input type="radio" id="jeri" name="hours-type" value="14203">
+                <input type="radio" id="jeri" name="meta" value="14203">
                 <label for="jeri"><b>Jericoacoara </b>- R$ 14.203,00</label>
             </div>
         </div>
         <div>
             <button onclick="calcular()">Calcular</button>
         </div>
-        
         
         <div class="results" id="resultadoDiv" style="display: none;"></div>
     </div>
