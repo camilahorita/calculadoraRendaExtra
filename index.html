@@ -35,7 +35,6 @@
                 <input type="number" id="outrosValor" placeholder="Digite o valor"><br>
             </div>
         </div>
-        
         <label for="goal"><h3>Escolha a Meta de Viagem:</h3></label>
         <div class="radio-group">
             <div>
@@ -58,8 +57,21 @@
         <div>
             <button onclick="calcular()">Calcular</button>
         </div>
-        
-        <div class="results" id="resultadoDiv" style="display: none;"></div>
+
+        <div class="results" id="result" style="display: none;" >
+            <div>
+                <p>Lucro mensal(R$/h):</p>
+                <div id="lucro-mensal"></div>
+            </div>
+            <div>
+                <p>Lucro anual (R$/ano)</p>
+                <div id="lucro-anual"></div>
+            </div>
+            <div>
+                <div>Meses:</div>
+                <div id="meses"></div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
